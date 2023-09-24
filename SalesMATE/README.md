@@ -9,51 +9,26 @@ App en Python que te permite hablar con multiples PDFs, puedes preguntarle cosas
 
 1. Carga PDFs: La aplicacion lee multiples documentos PDF y extrae su contenido como texto.
 
-2. Text Chunking: The extracted text is divided into smaller chunks that can be processed effectively.
+2. Text Chunking: El texto extraido se separa en pedazos más pequeños para procesarlos efectivamente. 
 
-3. Language Model: The application utilizes a language model to generate vector representations (embeddings) of the text chunks.
+3. Language Model: La aplicación utiliza un modelo de lenguaje que genera representaciones de vectores (embeddings).
 
-4. Similarity Matching: When you ask a question, the app compares it with the text chunks and identifies the most semantically similar ones.
+4. Similarity Matching: Cuando se le hace una pregunta se comprara con los PDFs subidos.
+   
+6. Response Generation: Los chunks seleccionados se pasan al modelo y genera una respuesta relevante.
 
-5. Response Generation: The selected chunks are passed to the language model, which generates a response based on the relevant content of the PDFs.
 
-## Dependencies and Installation
+## Instalación
 ----------------------------
-To install the MultiPDF Chat App, please follow these steps:
 
-1. Clone the repository to your local machine.
+1. Clonar el repositorio
 
-2. Install the required dependencies by running the following command:
+2. Instala los requerimientos con el comando:
    ```
    pip install -r requirements.txt
    ```
 
-3. Obtain an API key from OpenAI and add it to the `.env` file in the project directory.
+3. Obten un Key de API y agrégalo a `.env`.
 ```commandline
 OPENAI_API_KEY=your_secrit_api_key
 ```
-
-## Usage
------
-To use the MultiPDF Chat App, follow these steps:
-
-1. Ensure that you have installed the required dependencies and added the OpenAI API key to the `.env` file.
-
-2. Run the `main.py` file using the Streamlit CLI. Execute the following command:
-   ```
-   streamlit run app.py
-   ```
-
-3. The application will launch in your default web browser, displaying the user interface.
-
-4. Load multiple PDF documents into the app by following the provided instructions.
-
-5. Ask questions in natural language about the loaded PDFs using the chat interface.
-
-## Contributing
-------------
-This repository is intended for educational purposes and does not accept further contributions. It serves as supporting material for a YouTube tutorial that demonstrates how to build this project. Feel free to utilize and enhance the app based on your own requirements.
-
-## License
--------
-The MultiPDF Chat App is released under the [MIT License](https://opensource.org/licenses/MIT).
