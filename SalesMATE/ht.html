@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de PDF</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #6F988A;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            max-width: 400px;
+            border: 2px solid #ccc;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            background-color: #F2EFE5;
+        }
+
+        .chat-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .chat-message {
+            background-color: #708A81;;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .initial-message {
+            text-align: left;
+            background-color: #708A81; /* Changed the background color of the initial message */
+            color: #000;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .user-message {
+            text-align: right;
+            background-color: #ABC9BD;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px
+        }
+
+        .pdf-upload {
+            display: none;
+            margin-bottom: 15px;
+        }
+
+        .pdf-label {
+            background-color: #216D74;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-title">
+            PDF CHATBOT
+        </div>
+
+        <div class="initial-message">
+            ¡Hola! Por favor, sube un PDF para que pueda ayudarte.
+        </div>
+
+        <div id="chat-messages"></div>
+
+        <textarea id="user-input" class="chat-input" placeholder="Haz una pregunta..."></textarea>
+
+        <input type="file" id="pdf-upload" class="pdf-upload" accept=".pdf">
+        <label for="pdf-upload" class="pdf-label">Sube un PDF</label>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const pdfUpload = document.getElementById('pdf-upload');
+        const userInput = document.getElementById('user-input');
+
+        pdfUpload.addEventListener('change', () => {
+            const uploadedFile = pdfUpload.files[0];
+            if (uploadedFile) {
+                // Here, you can send the uploaded PDF to your server for processing.
+                // For simplicity, we'll just simulate a response from the chatbot.
+                const message = createChatMessage(uploadedFile.name, false);
+                chatMessages.appendChild(message);
+                setTimeout(() => {
+                    const response = createChatMessage("He recibido el PDF y ahora puedo contestar tus preguntas", false);
+                    chatMessages.appendChild(response);
+                }, 1000);
+            }
+        });
+
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const question = userInput.value;
+                if (question.trim() !== '') {
+                    const message = createChatMessage(question, true);
+                    chatMessages.appendChild(message);
+                    // Here, you can send the user's question to your server for processing
+                    // and get a response from the chatbot.
+                    // For simplicity, we'll simulate a response.
+                    setTimeout(() => {
+                        const response = createChatMessage("Esta es la respuesta a tu pregunta!", false);
+                        chatMessages.appendChild(response);
+                    }, 1000);
+
+                    userInput.value = '';
+                }
+            }
+        });
+
+        function createChatMessage(text, isUser) {
+            const message = document.createElement('div');
+            message.className = 'chat-message' + (isUser ? ' user-message' : '');
+            message.textContent = text;
+            return message;
+        }
+    </script>
+</body>
+</html>
